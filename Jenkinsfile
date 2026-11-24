@@ -9,8 +9,8 @@ pipeline {
         }
         stage('Vérification Python') {
             steps {
-                bat 'python -- version'
-                bat 'python -m pip -- version'
+                bat 'python --version'
+                bat 'python -m pip --version'
             }
         }
         stage('Installation des dépendances') {
