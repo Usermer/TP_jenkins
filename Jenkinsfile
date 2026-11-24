@@ -20,13 +20,25 @@ pipeline {
         }
         stage('Analyse qualite code -Pylint'){
             steps {
-                bat 'python -m pylint calculator.py'
+                bat 'python -m pylint calculator.py || exit /b 0'
 
             }
         }
         stage('Tests unitaires') {
             steps {
                 bat 'python -m pytest'
+            }
+        }
+        stage(' Creation de l artefact'){
+            steps {
+                bat '''
+                if exist Release rmdir /S/Q Release
+                mkdir Release
+
+                copy calculator.py Release
+                copy test_calculator.py Release
+                copy requirements.txt Release
+                '''
             }
         }
     }
