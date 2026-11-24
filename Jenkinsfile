@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        PYTHON_DIR = 'C:\\Users\\Pc\\AppData\\Local\\Programs\\Python\\Python312'
+        PYTHON_DIR = 'C:\\Users\\Pc\\AppData\\Local\\Programs\\Python\\Python311'
         PATH = "${PYTHON_DIR};${PYTHON_DIR}\\Scripts;${env.PATH}"
     }
 
