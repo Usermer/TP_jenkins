@@ -1,12 +1,12 @@
 pipeline {
     agent any
+
+    environment {
+        PYTHON_DIR = 'C:\\Users\\Pc\\AppData\\Local\\Programs\\Python\\Python312'
+        PATH = "${PYTHON_DIR};${PYTHON_DIR}\\Scripts;${env.PATH}"
+    }
+
     stages {
-    stage('Clonage') {
-            steps {
-                git branch: 'main',
-                url: 'https://github.com/Usermer/TP_jenkins'
-            }
-        }
         stage('Vérification Python') {
             steps {
                 bat 'python --version'
@@ -24,16 +24,10 @@ pipeline {
             }
         }
     }
-    post {
-        always {
-            echo 'Pipeline terminé'
-        }
-        success {
-            echo 'BUILD SUCCESS'
-        }
-        failure {
-            echo 'BUILD FAILED'
 
-        }
+    post {
+        always  { echo 'Pipeline terminé' }
+        success { echo 'BUILD SUCCESS' }
+        failure { echo 'BUILD FAILED' }
     }
 }
