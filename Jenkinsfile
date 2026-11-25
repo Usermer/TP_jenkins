@@ -7,6 +7,14 @@ pipeline {
     }
 
     stages {
+        stage('Nettoyage') {
+            steps {
+                bat '''
+                if exist Release rmdir /S /Q Release
+                if exist Release.zip del /Q Release.zip
+                '''
+            }
+        }
 
         stage('Vérification Python') {
             steps {
