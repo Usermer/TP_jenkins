@@ -56,20 +56,17 @@ pipeline {
             }
         }
 
+       
         stage('Publication de l artefact') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'nexus-credentials',
-                                                  usernameVariable: 'admin',
-                                                  passwordVariable: 'fd1c26ae-6590-46ec-942e-119fb06734d5')]) {
-                    bat '''
-                    curl -v ^
-                    -u %NEXUS_USER%:%NEXUS_PASS% ^
-                    --upload-file Release.zip ^
-                    http://localhost:8081/repository/python-release/Release.zip
-                    '''
-                }
+                bat '''
+                curl -v ^
+                -u admin:fd1c26ae-6590-46ec-942e-119fb06734d5 ^
+                --upload-file Release.zip ^
+                http://localhost:8081/repository/python-release/Release.zip
+                '''
             }
-        }
+}
     }
 
     post {
